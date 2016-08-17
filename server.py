@@ -48,7 +48,6 @@ class S(BaseHTTPRequestHandler):
         post_data = json.loads(self.rfile.read(content_length))
         send_to_zulip(post_data)
         self._set_headers()
-        self.wfile.write("<html><body><h1>POST!</h1></body></html>")
 
 # Actual server to handle the groupme messages  
 def run_groupme_listener():
