@@ -21,7 +21,7 @@ GROUPME_BOT_NAME  = "ABTech Bot"
 
 # Make a post request to the groupme api to post to a chat.
 def send_to_groupme(msg):
-    if(msg['sender_full_name'] != ZULIP_BOT_NAME and msg['subject'] == ZULIP_TOPIC}):
+    if(msg['sender_full_name'] != ZULIP_BOT_NAME and msg['subject'] == ZULIP_TOPIC):
         requests.post("https://api.groupme.com/v3/bots/post", 
           data={'bot_id': GROUPME_BOT_ID, 
                 'text': msg['sender_full_name'] + ": " + msg['content']})
