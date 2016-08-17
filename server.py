@@ -8,10 +8,10 @@ import requests
 # Please fill in all constants before operating
 # Also ensure groupme has the correct callback URI on their end. 
 ZULIP_STREAM      = "my_stream"
-ZULIP_TOPIC       = "Bot_testing"
 ZULIP_BOT_EMAIL   = "notarealemail-bot@andrew.cmu.edu"
 ZULIP_API_KEY     = "not-my-api-key"
 ZULIP_URL         = "https://andrew.zulipchat.com/api"
+ZULIP_TOPIC       = "Groupme"
 GROUPME_BOT_ID    = "not-my-bot-id"
 GROUPME_PORT      = 8000
 
@@ -21,7 +21,7 @@ GROUPME_BOT_NAME  = "ABTech Bot"
 
 # Make a post request to the groupme api to post to a chat.
 def send_to_groupme(msg):
-    if(msg['sender_full_name'] != ZULIP_BOT_NAME):
+    if(msg['sender_full_name'] != ZULIP_BOT_NAME and msg['subject'] == ZULIP_TOPIC}):
         requests.post("https://api.groupme.com/v3/bots/post", 
           data={'bot_id': GROUPME_BOT_ID, 
                 'text': msg['sender_full_name'] + ": " + msg['content']})
