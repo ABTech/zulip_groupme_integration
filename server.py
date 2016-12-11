@@ -33,7 +33,7 @@ def send_to_zulip(msg):
             "type": "stream",
             "to": ZULIP_STREAM,
             "subject": ZULIP_TOPIC,
-            "content": msg['name'] + ": " + msg['text']
+            "content": "**" + msg['name'] + "**: " + msg['text']
         })
 
 # Handler for the groupme messages
