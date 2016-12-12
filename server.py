@@ -29,11 +29,21 @@ def send_to_groupme(msg):
 # Use the python zulip functions to post to a stream
 def send_to_zulip(msg):
     if(msg['name'] != GROUPME_BOT_NAME):
+        message_text = msg['text']
+
+        # Check for image
+        for attachment in msg['attachments']:
+            # Add link to image to message text
+            if attachment['type'] == 'image':
+                caption = message_text if message_text else 'image'
+                message_text = '[%s](%s)\n' % (caption, attachment['url'])
+                break
+
         client.send_message({
             "type": "stream",
             "to": ZULIP_STREAM,
             "subject": ZULIP_TOPIC,
-            "content": "**" + msg['name'] + "**: " + msg['text']
+            "content": "**" + msg['name'] + "**: " + message_text
         })
 
 # Handler for the groupme messages
