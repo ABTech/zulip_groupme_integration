@@ -5,6 +5,7 @@ import threading
 import json
 import requests
 import secrets
+import ssl
 
 # !!! Please fill in all constants in secrets.py before operating !!!
 
@@ -54,6 +55,7 @@ def run_groupme_listener():
     server_address = ('', secrets.GROUPME_PORT)
     httpd = HTTPServer(server_address, S)
     print 'Starting httpd...'
+    httpd.socket = ssl.wrap_socket (httpd.socket, certfile=secrets.SSL_CERT_PATH, server_side=True) 
     httpd.serve_forever()
 
 # Wrapper for the zulip listener for threading
